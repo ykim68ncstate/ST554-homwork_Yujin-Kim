@@ -25,3 +25,18 @@
   - (7) Read through this short article: Article
  
 * Part IV. Querying a database - (8)-(13)
+
+### HomeWork 6
+* The purpose of this homework is to practice working with SQL queries and Python classes. In Part I, SQL queries are used to extract and combine information from a baseball database using pandas and SQLite. In Part II, a Python class is implemented to simulate the sampling distribution of a slope estimator in a simple linear regression model.
+
+* Part I. More Practice Querying a Database
+  - (1) Connect to SQLite database
+  - (2) Construct a table of Hall of Fame pitchers using SQL queries
+  - (3) Extract batting statistics for Hall of Fame pitchers
+  - (4) Merge pitching and batting statistics
+
+* Part II. Messing with Classes - (5) Simulation of the sampling distribution for the slope estimator
+  - (a) Initialize a Python class with model parameters
+  - (b) Implement required method for data generation, slope estimation, and simulation
+  - (c) Run simulations, visualize the ampling distribution, and estimate probabilities
+ 

@@ -53,3 +53,26 @@ class SparkDataCheck:
         
         self.df = self.df.withColumn(new_col_name, condition) #withColumn(); for append new Boolean column
         return self
+
+############################# Checkpoint: Test Class #1 - `check_numeric_range()` method ######################################################     
+
+    #Instruction: Create a method that checks if each value in a string column falls within a user specified set of levels and returns the dataframe with an appended column of Boolean values.
+    def check_string_levels(self, column, levels):                                       
+        dtype_dict = dict(self.df.dtypes)
+            
+        if column not in dtype_dict:                     
+            print(f"Column '{column}' does not exist.")
+            return self
+        
+        if dtype_dict[column] != "string":                          #Instruction: If the user supplies a non-string column 
+            print(f"Column '{column}' is not a string column.")     #Instruction: print a message and 
+            return self                                             #Instruction: return the df without modification
+            
+        new_col_name = f"{column}_valid"                                                              #Instruction: For any NULL vlaues, return NULL
+        
+        condition = F.when(F.col(column).isNull(), F.lit(None)).otherwise(F.col(column).isin(levels)) #Instruction: Hint: The .isin() method on a column is useful!
+        
+        self.df = self.df.withColumn(new_col_name, condition) #retruns the dataframe with an appended column of Boolean values
+        return self
+    
+    

@@ -77,7 +77,7 @@ class SparkDataCheck:
     
 ############################# Checkpoint: Test Class #1 - `check_string_levels()` method ######################################################      
 
-#Instruction: Create a method that checks if a each value in a column is missing (NULL specifically) and returns the dataframe with an appended column of Boolean values.
+    #Instruction: Create a method that checks if a each value in a column is missing (NULL specifically) and returns the dataframe with an appended column of Boolean values.
     def check_missing(self, column):                                       #Instruction: create a method
         dtype_dict = dict(self.df.dtypes)                                  
         
@@ -90,4 +90,45 @@ class SparkDataCheck:
         self.df = self.df.withColumn(new_col_name, F.col(column).isNull()) #Instruction: Hint: The .isNULL() method on a column is useful!
         
         return self
-    
+
+############################# Checkpoint: Test Class #1 - `check_missing()` method ###################################################### 
+
+    #Instruction: We’re going to also create a couple of summarization methods. Each summarization method will return the summarizations of the data as a pandas data frame.
+    #Instruction: Create a method to report the min and max of a numeric column supplied by the user. Add an optional grouping variable.
+    def summarize_min_max(self, column = None, groupby = None):
+        dtype_dict = dict(self.df.dtypes)
+        numeric_types = ["float", "int", "longint", "bigint", "double", "integer"] #Instruction: The method should check if the column is numeric.
+        
+        if column is not None:                                
+            if column not in dtype_dict: 
+                print(f"Column '{column}' does not exist.")
+                return None
+            
+            if dtype_dict[column] not in numeric_types:        #Instruction: If not, a message should be printed that the column isn’t numeric and 
+                print(f"Column '{column}' is not numeric.") 
+                return None                                    #Instruction: None should be returned
+                
+            if groupby:                                        #Instruction: If so, it should report the min and max of the column (grouped if appropriate).
+                result = self.df.groupBy(groupby).agg(F.min(column).alias(f"{column}_min"), F.max(column).alias(f"{column}_max")) #groupBy().agg() is min/max of each group
+            
+            else:
+                result = self.df.agg(F.min(column).alias(f"{column}_min"), F.max(column).alias(f"{column}_max")) #.agg() is entie min/max
+            return result.toPandas()                                                                             #Instruction: will return the summarizations of the data as a pandas data frame
+        
+        #Instruction: If no column is supplied, the method should report the min and max of any numeric columns (and produce no messages otherwise)
+        else:
+            numeric_cols = [col for col, dtype in dtype_dict.items() if dtype in numeric_types]
+            dfs = []                      #Instruction: grouped if appropriate
+            
+            for col in numeric_cols:      #Instruction: For the grouped option with all numeric columns 
+                if groupby:
+                    temp = self.df.groupBy(groupby).agg(F.min(column).alias(f"{column}_min"), F.max(column).alias(f"{column}_max"))
+                else:
+                    temp = self.df.agg(F.min(column).alias(f"{column}_min"), F.max(column).alias(f"{column}_max"))
+                    
+                dfs.append(temp.toPandas())
+
+            final_df = reduce(lambda left, right: pd.merge(left, right, how="outer"), dfs) #Instruction: I used reduce() from functools with pd.merge()
+            
+            return final_df
+        

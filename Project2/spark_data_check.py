@@ -132,3 +132,32 @@ class SparkDataCheck:
             
             return final_df
         
+############################# Checkpoint: Test Class #1 - `summarize_min_max()` method ###################################################### 
+
+    #Instruction: Create a method to report the counts associated with one or two string columns.
+    def summarize_counts(self, column1, column2 = None): #Instruction: Have the function take in two separate arguments for columns, with the second being optional and the first required.
+        dtype_dict = dict(self.df.dtypes) 
+        
+        if column1 not in dtype_dict: 
+            print(f"Column '{column1}' does not exist.")
+            return None
+        
+        if dtype_dict[column1] != "string":                       #Instruction: The method should check if the column(s) are strings.
+            print(f"Column '{column1}' is numeric.")              #Instruction: If not, a message should be printed that the column is numeric.
+            return None
+        
+        if column2 is not None:
+            if column2 not in dtype_dict: 
+                print(f"Column '{column2}' does not exist.")
+                return None
+            if dtype_dict[column2] != "string":
+                print(f"Column '{column2}' is numeric.")
+                return None
+        
+        if column2 is None:                           #Instruction: If so, it should report the counts for the combinations of levels of each variable or of the single variable.
+            result = self.df.groupBy(column1).count() #report count if there is one column
+            
+        else:
+            result = self.df.groupBy(column1, column2).count() #report the counts for the combinations of levels of each variable
+            
+        return result.toPandas()                               #return pandas dataframe

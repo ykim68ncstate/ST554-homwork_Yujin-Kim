@@ -75,4 +75,19 @@ class SparkDataCheck:
         self.df = self.df.withColumn(new_col_name, condition) #retruns the dataframe with an appended column of Boolean values
         return self
     
+############################# Checkpoint: Test Class #1 - `check_string_levels()` method ######################################################      
+
+#Instruction: Create a method that checks if a each value in a column is missing (NULL specifically) and returns the dataframe with an appended column of Boolean values.
+    def check_missing(self, column):                                       #Instruction: create a method
+        dtype_dict = dict(self.df.dtypes)                                  
+        
+        if column not in dtype_dict:                                       #Instruction: checks if a each value in a column is missing (NULL specifically)
+            print(f"Column '{column}' does not exist.")
+            return self                                                    #Instruction: returns the dataframe with an appended column of Boolean values.
+        
+        new_col_name = f"{column}_is_null"
+        
+        self.df = self.df.withColumn(new_col_name, F.col(column).isNull()) #Instruction: Hint: The .isNULL() method on a column is useful!
+        
+        return self
     

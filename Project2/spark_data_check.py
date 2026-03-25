@@ -97,7 +97,10 @@ class SparkDataCheck:
     #Instruction: Create a method to report the min and max of a numeric column supplied by the user. Add an optional grouping variable.
     def summarize_min_max(self, column = None, groupby = None):
         dtype_dict = dict(self.df.dtypes)
-        numeric_types = ["float", "int", "longint", "bigint", "double", "integer"] #Instruction: The method should check if the column is numeric.
+        numeric_types = ["float", "int", "long", "bigint", "double", "integer"] #Instruction: The method should check if the column is numeric.
+        if groupby is not None and groupby not in dtype_dict:
+            print(f"Grouping column'{groupby}' does not exist.")
+            return None
         
         if column is not None:                                
             if column not in dtype_dict: 
@@ -108,12 +111,18 @@ class SparkDataCheck:
                 print(f"Column '{column}' is not numeric.") 
                 return None                                    #Instruction: None should be returned
                 
-            if groupby:                                        #Instruction: If so, it should report the min and max of the column (grouped if appropriate).
-                result = self.df.groupBy(groupby).agg(F.min(column).alias(f"{column}_min"), F.max(column).alias(f"{column}_max")) #groupBy().agg() is min/max of each group
+            if groupby is not None:                                #Instruction: If so, it should report the min and max of the column (grouped if appropriate).
+                result = self.df.groupBy(groupby).agg(
+                    F.min(F.col(f"`{column}`")).alias(f"{column}_min"), #the format like PT08.S1(CO) makes error because . consier as a using method
+                    F.max(F.col(f"`{column}`")).alias(f"{column}_max")
+                ) #groupBy().agg() is min/max of each group
             
             else:
-                result = self.df.agg(F.min(column).alias(f"{column}_min"), F.max(column).alias(f"{column}_max")) #.agg() is entie min/max
-            return result.toPandas()                                                                             #Instruction: will return the summarizations of the data as a pandas data frame
+                result = self.df.agg(
+                    F.min(F.col(f"`{column}`")).alias(f"{column}_min"), 
+                    F.max(F.col(f"`{column}`")).alias(f"{column}_max")
+                ) #.agg() is entie min/max
+            return result.toPandas()                               #Instruction: will return the summarizations of the data as a pandas data frame
         
         #Instruction: If no column is supplied, the method should report the min and max of any numeric columns (and produce no messages otherwise)
         else:
@@ -121,15 +130,25 @@ class SparkDataCheck:
             dfs = []                      #Instruction: grouped if appropriate
             
             for col in numeric_cols:      #Instruction: For the grouped option with all numeric columns 
-                if groupby:
-                    temp = self.df.groupBy(groupby).agg(F.min(column).alias(f"{column}_min"), F.max(column).alias(f"{column}_max"))
+                if groupby is not None:
+                    temp = self.df.groupBy(groupby).agg(
+                        F.min(F.col(f"`{col}`")).alias(f"{col}_min"), 
+                        F.max(F.col(f"`{col}`")).alias(f"{col}_max")
+                    )
                 else:
-                    temp = self.df.agg(F.min(column).alias(f"{column}_min"), F.max(column).alias(f"{column}_max"))
-                    
+                    temp = self.df.agg(
+                        F.min(F.col(f"`{col}`")).alias(f"{col}_min"), 
+                        F.max(F.col(f"`{col}`")).alias(f"{col}_max")
+                    )
                 dfs.append(temp.toPandas())
-
-            final_df = reduce(lambda left, right: pd.merge(left, right, how="outer"), dfs) #Instruction: I used reduce() from functools with pd.merge()
-            
+                        
+            if len(dfs) == 0:
+                return pd.DataFrame()
+                        
+            if groupby is not None:
+                final_df = reduce(lambda left, right: pd.merge(left, right, on=groupby, how="outer"), dfs) #Instruction: I used reduce() from functools with pd.merge()
+            else:
+                final_df = pd.concat(dfs, axis=1)
             return final_df
         
 ############################# Checkpoint: Test Class #1 - `summarize_min_max()` method ###################################################### 
@@ -161,3 +180,5 @@ class SparkDataCheck:
             result = self.df.groupBy(column1, column2).count() #report the counts for the combinations of levels of each variable
             
         return result.toPandas()                               #return pandas dataframe
+
+############################# Checkpoint: Test Class #1 - `summarize_counts()` method ######################################################

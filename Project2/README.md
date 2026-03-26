@@ -1,7 +1,9 @@
 # Project 2
 
 ## Introduction 
- - Project overview and sturcture 
+This project focuses on data validation and analysis using PySpark. It is divided into two main parts.
+In Part I, I implement a custom class, `SparkDataCheck`, to perform data quality checks and summarization on Spark DataFrames.
+In Part II, I analyze NFL quarterback data using both pandas-on-Spark and Spark SQL DataFrame API to compare their workflows and results.
 
 ## Part I: Testing SparkDataCheck Class  
    1. Load Library and Class

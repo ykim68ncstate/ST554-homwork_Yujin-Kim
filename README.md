@@ -40,3 +40,9 @@
   - (b) Implement required method for data generation, slope estimation, and simulation
   - (c) Run simulations, visualize the ampling distribution, and estimate probabilities
  
+### HomeWork 7
+* This homework applies multiple linear regression and logistic regression to the wine quality dataset. Alcohol is predicted using regression models, and wine type (red or white) is classified using logistic regression. Models are evaluated using cross-validation and test set performance (RMSE, MAE, log-loss, and accuracy).
+  1. Read in and Combine Data
+  2. Split hte Data
+  3. Regression Task
+  4. Classification Task

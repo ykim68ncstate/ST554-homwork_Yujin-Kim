@@ -1,6 +1,6 @@
-# HomeWork: SST 554 (601) Spring 2026 Analysis of Big Data
+# Homework: SST 554 (601) Spring 2026 Analysis of Big Data
 
-### HomeWork 4
+### Homework 4
 * Summarizing Student Data Graphically
   - Task 1: [Categorical Variables] stacked bar and side-by-side bar graph
   - Task 1: [Numeric variables] histogram, kernerl density plot, boxplot, scatterplot
@@ -9,7 +9,7 @@
   - Task 1: Read in the data
   - Task 2: Summarize the data
 
-### HomeWork 5
+### Homework 5
 * The purpose of this homework is to explore issues related to big data, including bias in datasets and models, while also practicing SQL queries using a relational database.
 
 * Part I. Concepts
@@ -26,7 +26,7 @@
  
 * Part IV. Querying a database - (8)-(13)
 
-### HomeWork 6
+### Homework 6
 * The purpose of this homework is to practice working with SQL queries and Python classes. In Part I, SQL queries are used to extract and combine information from a baseball database using pandas and SQLite. In Part II, a Python class is implemented to simulate the sampling distribution of a slope estimator in a simple linear regression model.
 
 * Part I. More Practice Querying a Database
@@ -40,9 +40,19 @@
   - (b) Implement required method for data generation, slope estimation, and simulation
   - (c) Run simulations, visualize the ampling distribution, and estimate probabilities
  
-### HomeWork 7
+### Homework 7
 * This homework applies multiple linear regression and logistic regression to the wine quality dataset. Alcohol is predicted using regression models, and wine type (red or white) is classified using logistic regression. Models are evaluated using cross-validation and test set performance (RMSE, MAE, log-loss, and accuracy).
-  1. Read in and Combine Data
-  2. Split hte Data
-  3. Regression Task
-  4. Classification Task
+  (1) Read in and Combine Data
+  (2) Split hte Data
+  (3) Regression Task
+  (4) Classification Task
+
+### Homework 8
+* In Homework 8, I extended the modeling approaches from Homework 7 by applying tree-based methods, including regression trees, classification trees, and random forests. The goal was to explore more flexible, non-linear models and compare their performance with the linear and logistic models developed previously.
+  (1) Previous Work - Homework7
+  (2) Regression Task
+   - (a) Train Models: Regression tree and random forest
+   - (b) Test Models
+  (3) Classification Task
+   - (a) Train Models: Classification tree and random forest
+   - (b) Test Models

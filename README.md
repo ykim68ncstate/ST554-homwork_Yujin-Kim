@@ -42,10 +42,10 @@
  
 ### Homework 7
 * This homework applies multiple linear regression and logistic regression to the wine quality dataset. Alcohol is predicted using regression models, and wine type (red or white) is classified using logistic regression. Models are evaluated using cross-validation and test set performance (RMSE, MAE, log-loss, and accuracy).
-  (1) Read in and Combine Data
-  (2) Split hte Data
-  (3) Regression Task
-  (4) Classification Task
+  - (1) Read in and Combine Data
+  - (2) Split hte Data
+  - (3) Regression Task
+  - (4) Classification Task
 
 ### Homework 8
 * In Homework 8, I extended the modeling approaches from Homework 7 by applying tree-based methods, including regression trees, classification trees, and random forests. The goal was to explore more flexible, non-linear models and compare their performance with the linear and logistic models developed previously.

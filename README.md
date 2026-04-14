@@ -58,7 +58,7 @@
      - (b) Test Models
    
 ### Homework 9
-* In Homework 8, I extended the modeling approaches from Homework 7 by applying tree-based methods, including regression trees, classification trees, and random forests. The goal was to explore more flexible, non-linear models and compare their performance with the linear and logistic models developed previously.
+* In Homework 9, I applied supervised learning methods using Spark MLlib. The goal was to build and compare multiple models, including logistic regression, random forest, and gradient-boosted trees, using pipelines and cross validation, and to evaluate their performance on a test dataset.
   - (1) Dataset
      - (a) Data Cleaning
      - (b) Simple EDA

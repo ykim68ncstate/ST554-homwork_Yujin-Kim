@@ -56,3 +56,16 @@
   - (3) Classification Task
      - (a) Train Models: Classification tree and random forest
      - (b) Test Models
+   
+### Homework 9
+* In Homework 8, I extended the modeling approaches from Homework 7 by applying tree-based methods, including regression trees, classification trees, and random forests. The goal was to explore more flexible, non-linear models and compare their performance with the linear and logistic models developed previously.
+  - (1) Dataset
+     - (a) Data Cleaning
+     - (b) Simple EDA
+  - (2) Train-Test Split
+  - (3) Evaluation Metric
+  - (4) Models
+  - (5) Model Training Strategy
+     - (a) Logistic Regression Model
+     - (b) Random Forest Model
+     - (c) Gradient-Boosted Trees

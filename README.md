@@ -69,3 +69,8 @@
      - (a) Logistic Regression Model
      - (b) Random Forest Model
      - (c) Gradient-Boosted Trees
+   
+### Homework 10
+* In Homework 10, I worked with Spark Structured Streaming to process real-time data and apply transformations to both simulated and file-based streaming inputs. The goal was to understand the streaming workflow and how to integrate a fitted preprocessing pipeline with incoming data.
+  * Part I. Creating Streaming Data Using `rate`
+  * Part II. Using data from a CSV with a Pipeline

@@ -74,3 +74,19 @@
 * In Homework 10, I worked with Spark Structured Streaming to process real-time data and apply transformations to both simulated and file-based streaming inputs. The goal was to understand the streaming workflow and how to integrate a fitted preprocessing pipeline with incoming data.
   * Part I. Creating Streaming Data Using `rate`
   * Part II. Using data from a CSV with a Pipeline
+ 
+
+### Final Project
+* In the Final Project, I developed a machine learning and streaming pipeline using PySpark to predict power consumption. The project includes building an Elastic Net regression model with cross-validation and applying it to streaming data in real time.
+  - (1) Fitting Model
+     - (a) Data Loading
+     - (b) Data Transformation Pipeline
+     - (c) Model Training
+     - (d) Model Evaluation
+  - (2) Streaming Part
+     - (a) Reading a Stream
+     - (b) Transform / Aggregation Step
+     - (c) Writing Step
+  - (3) Produce Data
+
+* The Final Project folder includes final_project.ipynb, produce_streaming_data.py, power_streaming_data.csv, and output files (in stream_folder).
